@@ -1,0 +1,26 @@
+syntax = "proto3";
+package node;
+
+option go_package = "github.com/nathanieltornow/mercurius/node/nodepb";
+
+service Node {
+  rpc PrepareAndAcknowledge(stream PeerMessage) returns (stream PeerMessage);
+//  rpc Register(RegisterMessage) returns (RegisterMessage);
+}
+
+message PeerMessage {
+  MessageType MessageType = 1;
+  uint64 SN = 2;
+  uint32 Key = 3;
+  string Content = 4;
+}
+
+enum MessageType {
+  PREP = 0;
+  ACK = 1;
+}
+
+//message RegisterMessage {
+//  uint32 epoch = 1;
+//  string IP = 2;
+//}
